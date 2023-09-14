@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "origin": "Delhi",
+    "destination": "Mumbai",
+    "departureDate": "2023-09-15",
+    "returnDate": "2023-09-17",
+    "passengers": "Adult",
+    "price": 350
+  },
+  {
+    "id": 2,
+    "origin": "Bangalore",
+    "destination": "Chennai",
+    "departureDate": "2023-09-22",
+    "returnDate": "2023-09-29",
+    "passengers": "Child",
+    "price": 280
+  },
+  {
+    "id": 3,
+    "origin": "Kolkata",
+    "destination": "Hyderabad",
+    "departureDate": "2023-09-25",
+    "returnDate": "2023-10-02",
+    "passengers": "Adult",
+    "price": 420
+  },
+  {
+    "id": 4,
+    "origin": "Mumbai",
+    "destination": "Chennai",
+    "departureDate": "2023-09-18",
+    "returnDate": "2023-09-24",
+    "passengers": "Child",
+    "price": 320
+  },
+  {
+    "id": 5,
+    "origin": "Delhi",
+    "destination": "Kolkata",
+    "departureDate": "2023-09-20",
+    "returnDate": "2023-09-27",
+    "passengers": "Adult",
+    "price": 390
+  },
+  {
+    "id": 6,
+    "origin": "Bangalore",
+    "destination": "Hyderabad",
+    "departureDate": "2023-09-19",
+    "returnDate": "2023-09-26",
+    "passengers": "Child",
+    "price": 260
+  },
+  {
+    "id": 7,
+    "origin": "Chennai",
+    "destination": "Mumbai",
+    "departureDate": "2023-09-23",
+    "returnDate": "2023-09-30",
+    "passengers": "Adult",
+    "price": 330
+  },
+  {
+    "id": 8,
+    "origin": "Kolkata",
+    "destination": "Delhi",
+    "departureDate": "2023-09-21",
+    "returnDate": "2023-09-28",
+    "passengers": "Child",
+    "price": 290
+  },
+  {
+    "id": 9,
+    "origin": "Hyderabad",
+    "destination": "Bangalore",
+    "departureDate": "2023-09-16",
+    "returnDate": "2023-09-23",
+    "passengers": "Adult",
+    "price": 310
+  },
+  {
+    "id": 10,
+    "origin": "Mumbai",
+    "destination": "Kolkata",
+    "departureDate": "2023-09-17",
+    "returnDate": "2023-09-25",
+    "passengers": "Child",
+    "price": 270
+  }
+]
