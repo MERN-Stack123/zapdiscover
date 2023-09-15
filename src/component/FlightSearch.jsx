@@ -18,7 +18,7 @@ import {
   CardContent,
 } from "@mui/material";
 import Slider from "@mui/material/Slider";
-import flightData from "./flightData.json";
+import flightData from "./flightData.json"; // Updated flight data
 import departureDate from "./departureDateOptions.json";
 import returnDate from "./returnDateOptions.json";
 
@@ -65,39 +65,28 @@ const FlightSearch = () => {
   });
 
   const handleSearchSubmit = (values) => {
-    const isValidOrigin = flightData.some(
-      (flight) => flight.origin === values.origin
-    );
-    const isValidDestination = flightData.some(
-      (flight) => flight.destination === values.destination
-    );
-
-    if (!isValidOrigin || !isValidDestination) {
-      alert("Please enter valid origin and destination.");
-      return;
-    }
+    // Filter flights based on search criteria
     const results = flightData.filter((flight) => {
       return (
-        flight.origin === values.origin &&
-        flight.destination === values.destination &&
+        flight.origin.toLowerCase() === values.origin.toLowerCase() &&
+        flight.destination.toLowerCase() === values.destination.toLowerCase() &&
         flight.departureDate === values.departureDate &&
-        flight.returnDate === values.returnDate
+        (values.tabValue === 0 || flight.returnDate === values.returnDate) &&
+        flight.passengers === values.passengers
       );
     });
 
+    // Update search results
     setSearchResults(results);
 
+    // Move the toggleFormData call here
+    toggleFormData();
+
     if (results.length > 0) {
-      const selected = results.reduce((prev, current) =>
-        prev.price < current.price ? prev : current
-      );
       console.log("Flight search results:", results); // Log the results to the console
     } else {
       console.log("No matching flights found."); // Log a message indicating no results
     }
-
-    // Move the toggleFormData call here
-    toggleFormData();
   };
 
   const {
@@ -164,7 +153,7 @@ const FlightSearch = () => {
                   label="From"
                   variant="standard"
                   fullWidth
-                  placeholder="enter origin city"
+                  placeholder="Enter origin city"
                   name="origin"
                   value={values.origin}
                   onChange={handleChange}
@@ -178,7 +167,7 @@ const FlightSearch = () => {
                   label="To"
                   variant="standard"
                   fullWidth
-                  placeholder="enter destination city"
+                  placeholder="Enter destination city"
                   name="destination"
                   value={values.destination}
                   onChange={handleChange}
@@ -266,7 +255,7 @@ const FlightSearch = () => {
                   }
                   valueLabelDisplay="auto"
                   min={0}
-                  max={1000}
+                  max={10000}
                   name="priceRange"
                 />
               </Grid>
@@ -285,35 +274,47 @@ const FlightSearch = () => {
           </form>
         </Paper>
       </Grid>
-      {/* code */}
       <Grid item xs={12} md={6}>
-        {showFormData && (
-          <Card style={{ border: "2px solid #007bff", borderRadius: "10px" }}>
-            <CardContent>
-              <Typography variant="h6">Your Ticket</Typography>
-              <ul style={{ listStyleType: "none", padding: "0" }}>
-                <li>
-                  <strong>Origin:</strong> {values.origin}
-                </li>
-                <li>
-                  <strong>Destination:</strong> {values.destination}
-                </li>
-                <li>
-                  <strong>Departure Date:</strong> {values.departureDate}
-                </li>
-                <li>
-                  <strong>Return Date:</strong> {values.returnDate}
-                </li>
-                <li>
-                  <strong>Passengers:</strong> {values.passengers}
-                </li>
-                <li>
-                  <strong>Price:</strong> ${values.priceRange[1]}
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        )}
+        {/* Add a fixed-height div with vertical scrolling */}
+        <div
+          style={{
+            height: "80vh", // Adjust the height as needed
+            overflowY: "auto", // Enable vertical scrolling
+            scrollbarWidth: "none", // Hide the scrollbar in Firefox
+          }}
+        >
+          {searchResults.map((flight, index) => (
+            <Card
+              key={index}
+              style={{
+                border: "2px solid #007bff",
+                borderRadius: "10px",
+                marginTop: "20px",
+              }}
+            >
+              <CardContent>
+                <Typography variant="h6">Airline: {flight.airline}</Typography>
+                <ul style={{ listStyleType: "none", padding: "0" }}>
+                  <li>
+                    <strong>Origin:</strong> {flight.origin}
+                  </li>
+                  <li>
+                    <strong>Destination:</strong> {flight.destination}
+                  </li>
+                  <li>
+                    <strong>Departure Date:</strong> {flight.departureDate}
+                  </li>
+                  <li>
+                    <strong>Return Date:</strong> {flight.returnDate}
+                  </li>
+                  <li>
+                    <strong>Price:</strong> ${flight.price}
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </Grid>
     </Grid>
   );
